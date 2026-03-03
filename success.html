@@ -31,9 +31,9 @@
 
         html,
         body {
-            height: 100%;
+            min-height: 100%;
             width: 100%;
-            overflow: hidden;
+            overflow-x: hidden;
             background: var(--bg);
             font-family: 'Nunito', sans-serif;
             color: var(--text);
@@ -42,7 +42,7 @@
             padding-bottom: env(safe-area-inset-bottom);
         }
 
-        /* ── MATH BG ── */
+        /* ── SCIENCE BG ── */
         .bg-dots {
             position: fixed;
             inset: 0;
@@ -52,7 +52,7 @@
             background-size: 26px 26px;
         }
 
-        .bg-math {
+        .bg-science {
             position: fixed;
             inset: 0;
             z-index: 0;
@@ -152,7 +152,7 @@
         .page {
             position: relative;
             z-index: 1;
-            height: 100dvh;
+            min-height: 100dvh;
             max-width: 500px;
             margin: 0 auto;
             display: flex;
@@ -425,7 +425,7 @@
         <div class="blob blob-3"></div>
     </div>
     <div class="bg-dots"></div>
-    <div class="bg-math" id="bgMath"></div>
+    <div class="bg-science" id="bgScience"></div>
 
     <div class="page">
         <div class="topbar">
@@ -438,38 +438,38 @@
                 <div class="success-check">✓</div>
             </div>
             <div class="success-title">🎉 You're All Set!</div>
-            <div class="success-body">Welcome to the family. Your child's journey to AP Math mastery starts now.</div>
+            <div class="success-body">Welcome to the family. Your child's journey to U.S. AP Biology, Physics, and Chemistry excellence starts now.</div>
 
             <div class="roadmap-card">
-                <div class="roadmap-title">The MeraTutor Roadmap</div>
+                <div class="roadmap-title">The MeraTutor AP Science Roadmap</div>
                 <div class="roadmap-list">
                     <div class="roadmap-line"></div>
                     <div class="roadmap-item">
                         <div class="roadmap-icon">🎓</div>
                         <div>
                             <div class="roadmap-h">Teach</div>
-                            <div class="roadmap-p">Deep concept mastery & foundations</div>
+                            <div class="roadmap-p">Deep mastery of core AP Science concepts</div>
                         </div>
                     </div>
                     <div class="roadmap-item">
                         <div class="roadmap-icon">✏️</div>
                         <div>
                             <div class="roadmap-h">Practice</div>
-                            <div class="roadmap-p">Interactive application of theory</div>
+                            <div class="roadmap-p">Labs, problem sets & exam-style questions</div>
                         </div>
                     </div>
                     <div class="roadmap-item">
                         <div class="roadmap-icon">📋</div>
                         <div>
                             <div class="roadmap-h">Assessment</div>
-                            <div class="roadmap-p">Real-time performance evaluation</div>
+                            <div class="roadmap-p">Real-time tracking against AP exam standards</div>
                         </div>
                     </div>
                     <div class="roadmap-item">
                         <div class="roadmap-icon">📈</div>
                         <div>
                             <div class="roadmap-h">Improve</div>
-                            <div class="roadmap-p">Personalized feedback loops</div>
+                            <div class="roadmap-p">Personalized plans for Biology, Physics & Chemistry</div>
                         </div>
                     </div>
                     <div class="roadmap-item">
@@ -487,9 +487,9 @@
     </div>
 
     <script>
-        // BG Symbols
-        const syms = ['π', '∑', '√', '∞', 'Δ', '∫', 'θ', 'x²', 'f(x)', '≠', '±', 'α', 'β'];
-        const container = document.getElementById('bgMath');
+        // BG Symbols (Science)
+        const syms = ['🧪', '🔬', '🧬', '🌡️', '⚛️', '🔭', '🛰️', '🧫', '🧲', '💡', '🌎'];
+        const container = document.getElementById('bgScience');
         const isDesktop = window.innerWidth >= 1024;
         const count = isDesktop ? 30 : 15;
 

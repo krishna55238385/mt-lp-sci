@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport"
         content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-    <title>MeraTutor.ai — Free AP Math Classes</title>
+    <title>MeraTutor.ai — Free AP Science Classes</title>
     <link
         href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800;900&family=Nunito:wght@400;600;700;800&display=swap"
         rel="stylesheet">
@@ -41,7 +41,7 @@
             padding-top: env(safe-area-inset-top);
         }
 
-        /* ── MATH BG ── */
+        /* ── SCIENCE BG ── */
         .bg-dots {
             position: fixed;
             inset: 0;
@@ -51,7 +51,7 @@
             background-size: 26px 26px;
         }
 
-        .bg-math {
+        .bg-science {
             position: fixed;
             inset: 0;
             z-index: 0;
@@ -947,7 +947,7 @@
         <div class="blob blob-3"></div>
     </div>
     <div class="bg-dots"></div>
-    <div class="bg-math" id="bgMath"></div>
+    <div class="bg-science" id="bgScience"></div>
 
     <div class="page">
         <div class="topbar">
@@ -958,16 +958,16 @@
 
         <div class="content-left">
             <div class="hero">
-                <h1>Crush Your<br>AP Math Exam</h1>
+                <h1>Crush Your<br>AP Science Exams</h1>
                 <div class="hero-equation">👨‍🏫 Human <span class="eq-plus">+</span> AI <span
-                        class="eq-equals">=</span> Success 🏆</div>
+                        class="eq-equals">=</span> AP Biology · Physics · Chemistry 🧪</div>
             </div>
 
 
             <div class="stats">
                 <div class="stat-card">
                     <div class="stat-val">12K+</div>
-                    <div class="stat-lbl">Students</div>
+                    <div class="stat-lbl">U.S. Students</div>
                 </div>
                 <div class="stat-card">
                     <div class="stat-val">4.9 ⭐</div>
@@ -975,16 +975,16 @@
                 </div>
                 <div class="stat-card">
                     <div class="stat-val">94%</div>
-                    <div class="stat-lbl">Pass Rate</div>
+                    <div class="stat-lbl">AP Pass Rate</div>
                 </div>
                 <div class="stat-card">
                     <div class="stat-val" style="color:var(--orange)">+24 pts</div>
-                    <div class="stat-lbl">Avg Boost</div>
+                    <div class="stat-lbl">Avg AP Boost</div>
                 </div>
             </div>
 
             <div class="method">
-                <div class="method-title">The MeraTutor Method</div>
+                <div class="method-title">The MeraTutor AP Science Method</div>
                 <div class="method-steps">
                     <div class="step">
                         <div class="step-circle">🎓</div>
@@ -1015,14 +1015,14 @@
 
             <div class="quote">
                 <span class="quote-stars">⭐⭐⭐⭐⭐</span>
-                <span class="quote-text">"My son went from C to A in 3 weeks!" — Sarah M.</span>
+                <span class="quote-text">"My daughter went from struggling in AP Biology to a 5 in one semester." — U.S. Parent</span>
             </div>
         </div>
 
         <div class="form-card">
             <div id="formInner">
-                <div class="form-title">🏆 Book Your Demo Now</div>
-                <div class="form-trust">👨‍👩‍👧 US-Based AP Math Experts</div>
+                <div class="form-title">🏆 Book Your AP Science Demo</div>
+                <div class="form-trust">👨‍👩‍👧 U.S.-Based AP Biology, Physics & Chemistry Experts</div>
                 <div class="field">
                     <div class="input-wrap" id="w-name"><span class="input-icon">👤</span><input type="text" id="name"
                             placeholder="Student Name"></div>
@@ -1049,7 +1049,7 @@
         </div>
 
         <div class="trusted">
-            <div class="trusted-label">Trusted by Top Educators</div>
+            <div class="trusted-label">Trusted by U.S. AP Schools & Tutors</div>
             <div class="trusted-logos">
                 <div class="logo-pill"></div>
                 <div class="logo-pill"></div>
@@ -1068,9 +1068,9 @@
     </div>
 
     <script>
-        // BG Symbols
-        const syms = ['π', '∑', '√', '∞', 'Δ', '∫', 'θ', 'x²', 'f(x)', '≠', '±'];
-        const container = document.getElementById('bgMath');
+        // BG Symbols (Science)
+        const syms = ['🧪', '🔬', '🧬', '🌡️', '⚛️', '🔭', '🛰️', '🧫', '🧲', '💡', '🌎'];
+        const container = document.getElementById('bgScience');
         const isDesktop = window.innerWidth >= 1024;
         const count = isDesktop ? 30 : 15;
 
@@ -1098,11 +1098,13 @@
         }
         setInterval(updateT, 1000); updateT();
 
-        // Lead Submission
-        window.submitLead = function () {
+        // Lead Submission - send data to Google Sheets via Apps Script
+        window.submitLead = async function () {
             const n = document.getElementById('name').value.trim();
             const g = document.getElementById('grade').value;
             const p = document.getElementById('phone').value.replace(/\D/g, '');
+            const c = document.getElementById('country').value;
+
             let ok = true;
             if (!n) { document.getElementById('w-name').classList.add('error'); ok = false; }
             if (!g) { document.getElementById('w-grade').classList.add('error'); ok = false; }
@@ -1113,8 +1115,30 @@
                 return;
             }
 
+            const params = new URLSearchParams(window.location.search);
+
+            const formData = {
+                name: n,
+                grade: g,
+                phone: p,
+                country: c,
+                utm_source: params.get('utm_source'),
+                utm_campaign: params.get('utm_campaign'),
+                utm_medium: params.get('utm_medium'),
+                full_url: window.location.href,
+            };
+
+            try {
+                await fetch('https://script.google.com/macros/s/AKfycbwKPcRR7KaFWDe8TBlRdLDbXfB2djTFRtOPoay3W6TlZs9XLAtasOPmUP2x1P7AMDYr/exec', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(formData),
+                });
+            } catch (err) {
+                console.error('Error sending lead to Google Sheets', err);
+            }
+
             window.location.href = 'success.html';
-            console.log('Lead:', { n, g, p, c: document.getElementById('country').value });
         }
 
         // Phone Mask
